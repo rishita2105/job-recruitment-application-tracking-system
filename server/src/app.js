@@ -5,9 +5,19 @@ import helmet from "helmet";
 import healthRoutes from "./routes/healthRoutes.js";
 import authRoutes from "./routes/authRoutes.js";
 import path from "node:path";
+import { fileURLToPath } from "node:url";
 import candidateProfileRoutes from "./routes/CandidateProfileRoutes.js";
+import companyRoutes from "./routes/companyRoutes.js";
 
 const app = express();
+
+const filename = fileURLToPath(import.meta.url);
+const dirname = path.dirname(filename);
+
+const uploadsDirectory = path.resolve(
+  dirname,
+  "../uploads",
+);
 
 app.use(helmet());
 app.use(cors({
@@ -20,12 +30,30 @@ app.use(cookieParser());
 
 app.use(
   "/uploads",
-  express.static(path.join(process.cwd(), "uploads")),
+  function allowCrossOriginImages(
+    request,
+    response,
+    next,
+  ) {
+    response.setHeader(
+      "Cross-Origin-Resource-Policy",
+      "cross-origin",
+    );
+
+    next();
+  },
+
+  express.static(uploadsDirectory),
 );
 
 app.use(
   "/api/candidate/profile",
   candidateProfileRoutes,
+);
+
+app.use(
+  "/api/recruiter/company",
+  companyRoutes,
 );
 
 app.get("/", (request, response) => {
@@ -69,7 +97,7 @@ app.use((error, request, response, next) => {
   if (error.code === "LIMIT_FILE_SIZE") {
     return response.status(400).json({
       success: false,
-      message: "Resume cannot exceed 5 MB",
+      message: "The uploaded file is too large",
     });
   }
 

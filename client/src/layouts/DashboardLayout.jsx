@@ -1,4 +1,10 @@
-import { BriefcaseBusiness, House, LogOut, UserRound } from "lucide-react";
+import {
+  BriefcaseBusiness,
+  Building2,
+  House,
+  LogOut,
+  UserRound,
+} from "lucide-react";
 
 import { Link, NavLink, useNavigate } from "react-router";
 
@@ -59,6 +65,13 @@ export default function DashboardLayout({ role, title, subtitle, children }) {
             <NavLink to="/candidate/profile" className={navigationClass}>
               <UserRound size={18} />
               Profile
+            </NavLink>
+          )}
+
+          {roleKey === "recruiter" && (
+            <NavLink to="/recruiter/company" className={navigationClass}>
+              <Building2 size={18} />
+              Company
             </NavLink>
           )}
         </nav>

@@ -9,6 +9,7 @@ import NotFoundPage from "./pages/NotFoundPage";
 import UnauthorizedPage from "./pages/UnauthorizedPage";
 import ProtectedRoute from "./routes/ProtectedRoute";
 import CandidateProfilePage from "./pages/CandidateProfilePage";
+import RecruiterCompanyPage from "./pages/RecruiterCompanyPage";
 
 export default function App() {
   return (
@@ -38,6 +39,14 @@ export default function App() {
         element={
           <ProtectedRoute allowedRoles={["recruiter"]}>
             <RecruiterDashboard />
+          </ProtectedRoute>
+        }
+      />
+      <Route
+        path="/recruiter/company"
+        element={
+          <ProtectedRoute allowedRoles={["recruiter"]}>
+            <RecruiterCompanyPage />
           </ProtectedRoute>
         }
       />
