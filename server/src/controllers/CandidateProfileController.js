@@ -1,4 +1,4 @@
-import CandidateProfile from "../models/CandidateProfile";
+import CandidateProfile from "../models/CandidateProfile.js";
 
 function createEmptyProfile(userId) {
   return CandidateProfile.findOneAndUpdate(
