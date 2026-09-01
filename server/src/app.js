@@ -9,6 +9,9 @@ import { fileURLToPath } from "node:url";
 import candidateProfileRoutes from "./routes/CandidateProfileRoutes.js";
 import companyRoutes from "./routes/companyRoutes.js";
 import recruiterJobRoutes from "./routes/recruiterJobRoutes.js";
+import publicJobRoutes from "./routes/publicJobRoutes.js";
+import candidateJobRoutes from "./routes/candidateJobRoutes.js";
+
 
 const app = express();
 
@@ -60,6 +63,13 @@ app.use(
 app.use(
   "/api/recruiter/jobs",
   recruiterJobRoutes,
+);
+
+app.use("/api/jobs", publicJobRoutes);
+
+app.use(
+  "/api/candidate/jobs",
+  candidateJobRoutes,
 );
 
 app.get("/", (request, response) => {

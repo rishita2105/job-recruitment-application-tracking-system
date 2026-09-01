@@ -1,8 +1,11 @@
 import {
+  Bookmark,
   BriefcaseBusiness,
   Building2,
+  FileText,
   House,
   LogOut,
+  Search,
   UserRound,
 } from "lucide-react";
 
@@ -62,10 +65,27 @@ export default function DashboardLayout({ role, title, subtitle, children }) {
           </NavLink>
 
           {roleKey === "candidate" && (
-            <NavLink to="/candidate/profile" className={navigationClass}>
-              <UserRound size={18} />
-              Profile
-            </NavLink>
+            <>
+              <NavLink to="/candidate/profile" className={navigationClass}>
+                <UserRound size={18} />
+                Profile
+              </NavLink>
+
+              <NavLink to="/jobs" className={navigationClass}>
+                <Search size={18} />
+                Find Jobs
+              </NavLink>
+
+              <NavLink to="/candidate/saved-jobs" className={navigationClass}>
+                <Bookmark size={18} />
+                Saved Jobs
+              </NavLink>
+
+              <NavLink to="/candidate/applications" className={navigationClass}>
+                <FileText size={18} />
+                Applications
+              </NavLink>
+            </>
           )}
 
           {roleKey === "recruiter" && (

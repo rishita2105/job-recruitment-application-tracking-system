@@ -12,6 +12,10 @@ import CandidateProfilePage from "./pages/CandidateProfilePage";
 import RecruiterCompanyPage from "./pages/RecruiterCompanyPage";
 import RecruiterJobsPage from "./pages/RecruiterJobsPage";
 import RecruiterJobFormPage from "./pages/RecruiterJobFormPage";
+import JobsPage from "./pages/JobsPage";
+import JobDetailsPage from "./pages/JobDetailsPage";
+import SavedJobsPage from "./pages/SavedJobsPage";
+import MyApplicationsPage from "./pages/MyApplicationsPage";
 
 export default function App() {
   return (
@@ -33,6 +37,23 @@ export default function App() {
         element={
           <ProtectedRoute allowedRoles={["candidate"]}>
             <CandidateProfilePage />
+          </ProtectedRoute>
+        }
+      />
+      <Route
+        path="/candidate/saved-jobs"
+        element={
+          <ProtectedRoute allowedRoles={["candidate"]}>
+            <SavedJobsPage />
+          </ProtectedRoute>
+        }
+      />
+
+      <Route
+        path="/candidate/applications"
+        element={
+          <ProtectedRoute allowedRoles={["candidate"]}>
+            <MyApplicationsPage />
           </ProtectedRoute>
         }
       />
@@ -76,6 +97,9 @@ export default function App() {
           </ProtectedRoute>
         }
       />
+      <Route path="/jobs" element={<JobsPage />} />
+
+      <Route path="/jobs/:jobId" element={<JobDetailsPage />} />
       <Route
         path="/admin/dashboard"
         element={
