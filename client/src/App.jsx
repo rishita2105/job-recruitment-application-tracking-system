@@ -10,6 +10,8 @@ import UnauthorizedPage from "./pages/UnauthorizedPage";
 import ProtectedRoute from "./routes/ProtectedRoute";
 import CandidateProfilePage from "./pages/CandidateProfilePage";
 import RecruiterCompanyPage from "./pages/RecruiterCompanyPage";
+import RecruiterJobsPage from "./pages/RecruiterJobsPage";
+import RecruiterJobFormPage from "./pages/RecruiterJobFormPage";
 
 export default function App() {
   return (
@@ -47,6 +49,30 @@ export default function App() {
         element={
           <ProtectedRoute allowedRoles={["recruiter"]}>
             <RecruiterCompanyPage />
+          </ProtectedRoute>
+        }
+      />
+      <Route
+        path="/recruiter/jobs"
+        element={
+          <ProtectedRoute allowedRoles={["recruiter"]}>
+            <RecruiterJobsPage />
+          </ProtectedRoute>
+        }
+      />
+      <Route
+        path="/recruiter/jobs/new"
+        element={
+          <ProtectedRoute allowedRoles={["recruiter"]}>
+            <RecruiterJobFormPage />
+          </ProtectedRoute>
+        }
+      />
+      <Route
+        path="/recruiter/jobs/:jobId/edit"
+        element={
+          <ProtectedRoute allowedRoles={["recruiter"]}>
+            <RecruiterJobFormPage />
           </ProtectedRoute>
         }
       />

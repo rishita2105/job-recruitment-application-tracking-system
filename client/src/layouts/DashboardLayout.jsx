@@ -74,6 +74,12 @@ export default function DashboardLayout({ role, title, subtitle, children }) {
               Company
             </NavLink>
           )}
+          {roleKey === "recruiter" && (
+            <NavLink to="/recruiter/jobs" className={navigationClass}>
+              <BriefcaseBusiness size={18} />
+              Jobs
+            </NavLink>
+          )}
         </nav>
 
         <button
