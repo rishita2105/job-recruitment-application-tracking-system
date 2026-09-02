@@ -11,7 +11,7 @@ import companyRoutes from "./routes/companyRoutes.js";
 import recruiterJobRoutes from "./routes/recruiterJobRoutes.js";
 import publicJobRoutes from "./routes/publicJobRoutes.js";
 import candidateJobRoutes from "./routes/candidateJobRoutes.js";
-
+import recruiterApplicantRoutes from "./routes/recruiterApplicantRoutes.js";
 
 const app = express();
 
@@ -63,6 +63,11 @@ app.use(
 app.use(
   "/api/recruiter/jobs",
   recruiterJobRoutes,
+);
+
+app.use(
+  "/api/recruiter",
+  recruiterApplicantRoutes,
 );
 
 app.use("/api/jobs", publicJobRoutes);

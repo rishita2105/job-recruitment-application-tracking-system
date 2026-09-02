@@ -7,6 +7,7 @@ import {
   LogOut,
   Search,
   UserRound,
+  UsersRound,
 } from "lucide-react";
 
 import { Link, NavLink, useNavigate } from "react-router";
@@ -89,16 +90,22 @@ export default function DashboardLayout({ role, title, subtitle, children }) {
           )}
 
           {roleKey === "recruiter" && (
-            <NavLink to="/recruiter/company" className={navigationClass}>
-              <Building2 size={18} />
-              Company
-            </NavLink>
-          )}
-          {roleKey === "recruiter" && (
-            <NavLink to="/recruiter/jobs" className={navigationClass}>
-              <BriefcaseBusiness size={18} />
-              Jobs
-            </NavLink>
+            <>
+              <NavLink to="/recruiter/company" className={navigationClass}>
+                <Building2 size={18} />
+                Company
+              </NavLink>
+
+              <NavLink to="/recruiter/jobs" className={navigationClass}>
+                <BriefcaseBusiness size={18} />
+                Jobs
+              </NavLink>
+
+              <NavLink to="/recruiter/applications" className={navigationClass}>
+                <UsersRound size={18} />
+                Applicants
+              </NavLink>
+            </>
           )}
         </nav>
 

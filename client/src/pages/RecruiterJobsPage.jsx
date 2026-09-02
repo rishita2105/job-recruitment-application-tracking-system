@@ -190,6 +190,12 @@ export default function RecruiterJobsPage() {
 
                   <div className="flex flex-wrap items-start gap-2">
                     <Link
+                      to={`/recruiter/jobs/${job._id}/applicants`}
+                      className="rounded-xl bg-blue-50 px-4 py-2 text-sm font-bold text-blue-700"
+                    >
+                      View Applicants
+                    </Link>
+                    <Link
                       to={`/recruiter/jobs/${job._id}/edit`}
                       className="flex items-center gap-2 rounded-xl bg-slate-100 px-4 py-2 text-sm font-bold"
                     >
