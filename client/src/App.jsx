@@ -18,6 +18,9 @@ import SavedJobsPage from "./pages/SavedJobsPage";
 import MyApplicationsPage from "./pages/MyApplicationsPage";
 import RecruiterApplicantsPage from "./pages/RecruiterApplicantsPage";
 import RecruiterApplicationDetailsPage from "./pages/RecruiterApplicationDetailsPage";
+import RecruiterInterviewFormPage from "./pages/RecruiterInterviewFormPage";
+import RecruiterInterviewsPage from "./pages/RecruiterInterviewsPage";
+import CandidateInterviewsPage from "./pages/CandidateInterviewsPage";
 
 export default function App() {
   return (
@@ -125,6 +128,42 @@ export default function App() {
           </ProtectedRoute>
         }
       />
+      <Route
+        path="/recruiter/applications/:applicationId/schedule-interview"
+        element={
+          <ProtectedRoute allowedRoles={["recruiter"]}>
+            <RecruiterInterviewFormPage />
+          </ProtectedRoute>
+        }
+      />
+
+      <Route
+        path="/recruiter/interviews"
+        element={
+          <ProtectedRoute allowedRoles={["recruiter"]}>
+            <RecruiterInterviewsPage />
+          </ProtectedRoute>
+        }
+      />
+
+      <Route
+        path="/recruiter/interviews/:interviewId/edit"
+        element={
+          <ProtectedRoute allowedRoles={["recruiter"]}>
+            <RecruiterInterviewFormPage />
+          </ProtectedRoute>
+        }
+      />
+
+      <Route
+        path="/candidate/interviews"
+        element={
+          <ProtectedRoute allowedRoles={["candidate"]}>
+            <CandidateInterviewsPage />
+          </ProtectedRoute>
+        }
+      />
+
       <Route path="/jobs" element={<JobsPage />} />
 
       <Route path="/jobs/:jobId" element={<JobDetailsPage />} />

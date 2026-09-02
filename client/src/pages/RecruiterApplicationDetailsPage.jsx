@@ -201,6 +201,22 @@ export default function RecruiterApplicationDetailsPage() {
                 {button.label}
               </button>
             ))}
+            {application.status === "shortlisted" && (
+              <Link
+                to={`/recruiter/applications/${application._id}/schedule-interview`}
+                className="rounded-xl bg-cyan-600 px-4 py-2 text-sm font-bold text-white"
+              >
+                Schedule Interview
+              </Link>
+            )}
+            {application.status === "interview_scheduled" && (
+              <Link
+                to="/recruiter/interviews"
+                className="rounded-xl bg-cyan-50 px-4 py-2 text-sm font-bold text-cyan-700"
+              >
+                View Interview
+              </Link>
+            )}
           </div>
         </section>
 

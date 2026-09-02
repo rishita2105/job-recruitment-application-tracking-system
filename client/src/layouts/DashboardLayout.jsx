@@ -2,6 +2,7 @@ import {
   Bookmark,
   BriefcaseBusiness,
   Building2,
+  CalendarDays,
   FileText,
   House,
   LogOut,
@@ -86,6 +87,11 @@ export default function DashboardLayout({ role, title, subtitle, children }) {
                 <FileText size={18} />
                 Applications
               </NavLink>
+
+              <NavLink to="/candidate/interviews" className={navigationClass}>
+                <CalendarDays size={18} />
+                Interviews
+              </NavLink>
             </>
           )}
 
@@ -104,6 +110,11 @@ export default function DashboardLayout({ role, title, subtitle, children }) {
               <NavLink to="/recruiter/applications" className={navigationClass}>
                 <UsersRound size={18} />
                 Applicants
+              </NavLink>
+
+              <NavLink to="/recruiter/interviews" className={navigationClass}>
+                <CalendarDays size={18} />
+                Interviews
               </NavLink>
             </>
           )}
