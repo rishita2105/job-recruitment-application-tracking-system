@@ -14,11 +14,14 @@ import candidateJobRoutes from "./routes/candidateJobRoutes.js";
 import recruiterApplicantRoutes from "./routes/recruiterApplicantRoutes.js";
 import recruiterInterviewRoutes from "./routes/recruiterInterviewRoutes.js";
 import candidateInterviewRoutes from "./routes/candidateInterviewRoutes.js";
+import dashboardRoutes from "./routes/dashboardRoutes.js";
 
 const app = express();
 
 const filename = fileURLToPath(import.meta.url);
 const dirname = path.dirname(filename);
+
+//const dashboardRoutes = require("./routes/dashboardRoutes");
 
 const uploadsDirectory = path.resolve(
   dirname,
@@ -88,6 +91,8 @@ app.use(
   "/api/candidate/jobs",
   candidateJobRoutes,
 );
+
+app.use("/api/dashboard", dashboardRoutes);
 
 app.get("/", (request, response) => {
   response.json({

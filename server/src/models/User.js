@@ -30,6 +30,14 @@ const userSchema = new mongoose.Schema(
       required: true,
       default: "candidate",
     },
+    isBlocked: {
+      type: Boolean,
+      default: false,
+    },
+    blockedAt: {
+      type: Date,
+      default: null,
+    },
     status: {
       type: String,
       enum: ["active", "blocked"],
@@ -44,7 +52,9 @@ userSchema.pre("save", async function hashPassword() {
   this.password = await bcrypt.hash(this.password, 12);
 });
 
-userSchema.methods.comparePassword = function comparePassword(candidatePassword) {
+userSchema.methods.comparePassword = function comparePassword(
+  candidatePassword,
+) {
   return bcrypt.compare(candidatePassword, this.password);
 };
 

@@ -19,7 +19,7 @@ export default function DashboardLayout({ role, title, subtitle, children }) {
   const { user, logout } = useAuth();
   const navigate = useNavigate();
 
-  const roleKey = role.toLowerCase();
+  const roleKey = role.toLowerCase() || user?.role || "";
 
   const dashboardPath = `/${roleKey}/dashboard`;
 

@@ -1,20 +1,21 @@
-export default function StatCard({ title, value, icon: Icon, accent = "blue" }) {
-  const accents = {
-    blue: "bg-blue-50 text-blue-700",
-    violet: "bg-violet-50 text-violet-700",
-    amber: "bg-amber-50 text-amber-700",
-    emerald: "bg-emerald-50 text-emerald-700",
-    rose: "bg-rose-50 text-rose-700",
-  };
-
+export default function StatCard({
+  title,
+  value,
+  icon: Icon,
+  iconColor = "text-blue-600",
+  iconBackground = "bg-blue-50",
+}) {
   return (
-    <article className="rounded-2xl border border-slate-200 bg-white p-5 shadow-sm">
-      <div className={`grid size-10 place-items-center rounded-xl ${accents[accent]}`}>
-        <Icon size={19} />
+    <div className="min-h-[182px] rounded-2xl border border-slate-200 bg-white p-6 shadow-sm">
+      <div
+        className={`flex h-12 w-12 items-center justify-center rounded-xl ${iconBackground}`}
+      >
+        <Icon className={`h-6 w-6 ${iconColor}`} />
       </div>
-      <p className="mt-5 text-3xl font-bold">{value}</p>
-      <p className="mt-1 text-sm text-slate-500">{title}</p>
-    </article>
+
+      <p className="mt-7 text-4xl font-bold text-slate-950">{value ?? 0}</p>
+
+      <p className="mt-1 text-base text-slate-500">{title}</p>
+    </div>
   );
 }
-
