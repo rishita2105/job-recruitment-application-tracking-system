@@ -1,4 +1,5 @@
 import { useState } from "react";
+import { Eye, EyeOff } from "lucide-react";
 import { Link, Navigate, useLocation, useNavigate } from "react-router";
 import { useAuth } from "../context/AuthContext";
 
@@ -8,6 +9,7 @@ function dashboardFor(role) {
 
 export default function LoginPage() {
   const [form, setForm] = useState({ email: "", password: "" });
+  const [showPassword, setShowPassword] = useState(false);
   const [error, setError] = useState("");
   const [submitting, setSubmitting] = useState(false);
   const { user, loading, login } = useAuth();
@@ -54,7 +56,27 @@ export default function LoginPage() {
         <input id="email" name="email" value={form.email} onChange={updateField} type="email" required autoComplete="email" placeholder="you@example.com" className="mt-2 w-full rounded-xl border border-slate-300 px-4 py-3 outline-none focus:border-blue-500" />
 
         <label htmlFor="password" className="mt-5 block text-sm font-semibold">Password</label>
-        <input id="password" name="password" value={form.password} onChange={updateField} type="password" required autoComplete="current-password" placeholder="Enter your password" className="mt-2 w-full rounded-xl border border-slate-300 px-4 py-3 outline-none focus:border-blue-500" />
+        <div className="relative mt-2">
+          <input
+            id="password"
+            name="password"
+            value={form.password}
+            onChange={updateField}
+            type={showPassword ? "text" : "password"}
+            required
+            autoComplete="current-password"
+            placeholder="Enter your password"
+            className="w-full rounded-xl border border-slate-300 px-4 py-3 pr-12 outline-none focus:border-blue-500"
+          />
+          <button
+            type="button"
+            onClick={() => setShowPassword((current) => !current)}
+            aria-label={showPassword ? "Hide password" : "Show password"}
+            className="absolute inset-y-0 right-0 grid place-items-center px-3 text-slate-500 hover:text-slate-800"
+          >
+            {showPassword ? <EyeOff size={18} /> : <Eye size={18} />}
+          </button>
+        </div>
 
         <button disabled={submitting} className="mt-7 w-full rounded-xl bg-slate-950 px-4 py-3 font-bold text-white disabled:cursor-not-allowed disabled:opacity-60">
           {submitting ? "Logging in..." : "Log in"}
