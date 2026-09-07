@@ -1,9 +1,5 @@
-import {
-  BriefcaseBusiness,
-  Building2,
-  ShieldCheck,
-  UserRound,
-} from "lucide-react";
+import { BriefcaseBusiness, Building2, UserRound } from "lucide-react";
+
 import { Link } from "react-router";
 import { useAuth } from "../context/AuthContext";
 
@@ -21,13 +17,6 @@ const roles = [
     path: "/register?role=recruiter",
     icon: Building2,
     color: "bg-violet-600",
-  },
-  {
-    name: "Admin",
-    text: "Manage the platform, users, and reports.",
-    path: "/login",
-    icon: ShieldCheck,
-    color: "bg-emerald-600",
   },
 ];
 
@@ -49,7 +38,10 @@ export default function HomePage() {
 
           <div className="flex items-center gap-3">
             {!user && (
-              <Link to="/register" className="text-sm font-bold text-slate-300">
+              <Link
+                to="/register"
+                className="text-sm font-bold text-slate-300 hover:text-white"
+              >
                 Register
               </Link>
             )}
@@ -69,16 +61,16 @@ export default function HomePage() {
           </p>
 
           <h1 className="mx-auto mt-5 max-w-4xl text-5xl font-bold tracking-[-0.05em] sm:text-7xl">
-            One hiring platform. Three focused workspaces.
+            One hiring platform. Two focused workspaces.
           </h1>
 
           <p className="mx-auto mt-6 max-w-2xl text-lg leading-8 text-slate-300">
-            Connect candidates and recruiters while giving administrators
-            complete control of the platform.
+            Connect candidates and recruiters through one simple hiring
+            platform.
           </p>
         </section>
 
-        <section className="grid gap-4 md:grid-cols-3">
+        <section className="mx-auto grid max-w-4xl gap-4 md:grid-cols-2">
           {roles.map(({ name, text, path, icon: Icon, color }) => (
             <Link
               key={name}
