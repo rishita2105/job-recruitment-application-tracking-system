@@ -127,6 +127,11 @@ export default function DashboardLayout({ role, title, subtitle, children }) {
                 Users
               </NavLink>
 
+              <NavLink to="/admin/companies" className={navigationClass}>
+                <Building2 size={18} />
+                Companies
+              </NavLink>
+
               <NavLink to="/admin/jobs" className={navigationClass}>
                 <BriefcaseBusiness size={18} />
                 Jobs

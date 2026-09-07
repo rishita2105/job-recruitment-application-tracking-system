@@ -24,6 +24,7 @@ import CandidateInterviewsPage from "./pages/CandidateInterviewsPage";
 import AdminUsersPage from "./pages/AdminUsersPage";
 import AdminJobsPage from "./pages/AdminJobsPage";
 import AdminCategoriesPage from "./pages/AdminCategoriesPage";
+import AdminCompaniesPage from "./pages/AdminCompaniesPage";
 
 export default function App() {
   return (
@@ -192,6 +193,15 @@ export default function App() {
         element={
           <ProtectedRoute allowedRoles={["admin"]}>
             <AdminJobsPage />
+          </ProtectedRoute>
+        }
+      />
+
+      <Route
+        path="/admin/companies"
+        element={
+          <ProtectedRoute allowedRoles={["admin"]}>
+            <AdminCompaniesPage />
           </ProtectedRoute>
         }
       />

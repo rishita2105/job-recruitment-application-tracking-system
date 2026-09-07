@@ -1,5 +1,6 @@
 import mongoose from "mongoose";
 
+import Company from "../models/Company.js";
 import User from "../models/User.js";
 import Job from "../models/Job.js";
 import Application from "../models/Application.js";
@@ -513,6 +514,125 @@ export async function getActiveCategories(request, response) {
     return response.status(500).json({
       success: false,
       message: "Unable to load categories",
+    });
+  }
+}
+
+// GET /api/admin/companies
+export async function getAllCompanies(request, response) {
+  try {
+    const { search = "", status = "" } = request.query;
+
+    const filter = {};
+
+    if (search.trim()) {
+      const safeSearch = escapeRegex(search.trim());
+
+      filter.$or = [
+        {
+          name: {
+            $regex: safeSearch,
+            $options: "i",
+          },
+        },
+        {
+          industry: {
+            $regex: safeSearch,
+            $options: "i",
+          },
+        },
+        {
+          location: {
+            $regex: safeSearch,
+            $options: "i",
+          },
+        },
+        {
+          email: {
+            $regex: safeSearch,
+            $options: "i",
+          },
+        },
+      ];
+    }
+
+    if (status && ["pending", "approved", "rejected"].includes(status)) {
+      filter.status = status;
+    }
+
+    const companies = await Company.find(filter)
+      .populate("recruiter", "name email role status")
+      .sort({
+        createdAt: -1,
+      });
+
+    return response.status(200).json({
+      success: true,
+      count: companies.length,
+      companies,
+    });
+  } catch (error) {
+    console.error("Get companies error:", error);
+
+    return response.status(500).json({
+      success: false,
+      message: "Unable to load companies",
+    });
+  }
+}
+
+// PATCH /api/admin/companies/:companyId/status
+export async function updateCompanyStatus(request, response) {
+  try {
+    const { companyId } = request.params;
+    const { status } = request.body;
+
+    if (!mongoose.isValidObjectId(companyId)) {
+      return response.status(400).json({
+        success: false,
+        message: "Invalid company ID",
+      });
+    }
+
+    if (!["pending", "approved", "rejected"].includes(status)) {
+      return response.status(400).json({
+        success: false,
+        message: "Status must be pending, approved, or rejected",
+      });
+    }
+
+    const company = await Company.findById(companyId);
+
+    if (!company) {
+      return response.status(404).json({
+        success: false,
+        message: "Company not found",
+      });
+    }
+
+    company.status = status;
+
+    await company.save();
+
+    await company.populate("recruiter", "name email role status");
+
+    const statusMessages = {
+      pending: "Company moved to pending review",
+      approved: "Company approved successfully",
+      rejected: "Company rejected successfully",
+    };
+
+    return response.status(200).json({
+      success: true,
+      message: statusMessages[status],
+      company,
+    });
+  } catch (error) {
+    console.error("Update company status error:", error);
+
+    return response.status(500).json({
+      success: false,
+      message: "Unable to update company status",
     });
   }
 }

@@ -9,6 +9,8 @@ import {
   createCategory,
   updateCategory,
   deleteCategory,
+  getAllCompanies,
+  updateCompanyStatus,
 } from "../controllers/adminController.js";
 
 import { authenticate } from "../middleware/authenticate.js";
@@ -21,6 +23,9 @@ router.use(authorizeRoles("admin"));
 
 router.get("/users", getAllUsers);
 router.patch("/users/:userId/block", toggleUserBlock);
+
+router.get("/companies", getAllCompanies);
+router.patch("/companies/:companyId/status", updateCompanyStatus);
 
 router.get("/jobs", getAllJobsForAdmin);
 router.delete("/jobs/:jobId", removeJob);

@@ -1,10 +1,6 @@
 import Company from "../models/Company.js";
 
-export async function getMyCompany(
-  request,
-  response,
-  next,
-) {
+export async function getMyCompany(request, response, next) {
   try {
     const company = await Company.findOne({
       recruiter: request.user._id,
@@ -19,11 +15,7 @@ export async function getMyCompany(
   }
 }
 
-export async function saveMyCompany(
-  request,
-  response,
-  next,
-) {
+export async function saveMyCompany(request, response, next) {
   try {
     const {
       name,
@@ -54,9 +46,9 @@ export async function saveMyCompany(
       phone: phone?.trim() || "",
       companySize: companySize || "",
 
-      foundedYear: foundedYear
-        ? Number(foundedYear)
-        : null,
+      foundedYear: foundedYear ? Number(foundedYear) : null,
+
+      status: "pending",
     };
 
     const company = await Company.findOneAndUpdate(
@@ -68,7 +60,6 @@ export async function saveMyCompany(
 
         $setOnInsert: {
           recruiter: request.user._id,
-          status: "pending",
         },
       },
       {
@@ -88,11 +79,7 @@ export async function saveMyCompany(
   }
 }
 
-export async function uploadMyCompanyLogo(
-  request,
-  response,
-  next,
-) {
+export async function uploadMyCompanyLogo(request, response, next) {
   try {
     if (!request.file) {
       return response.status(400).json({
@@ -108,13 +95,13 @@ export async function uploadMyCompanyLogo(
     if (!company) {
       return response.status(400).json({
         success: false,
-        message:
-          "Save the company profile before uploading a logo",
+        message: "Save the company profile before uploading a logo",
       });
     }
 
-    company.logoUrl =
-      `/uploads/company-logos/${request.file.filename}`;
+    company.logoUrl = `/uploads/company-logos/${request.file.filename}`;
+
+    company.status = "pending";
 
     await company.save();
 
