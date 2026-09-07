@@ -1,5 +1,9 @@
 import User from "../models/User.js";
-import { clearTokenCookie, createToken, setTokenCookie } from "../utils/token.js";
+import {
+  clearTokenCookie,
+  createToken,
+  setTokenCookie,
+} from "../utils/token.js";
 
 function publicUser(user) {
   return {

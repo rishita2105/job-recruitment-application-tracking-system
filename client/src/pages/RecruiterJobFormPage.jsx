@@ -38,6 +38,22 @@ export default function RecruiterJobFormPage() {
 
   const [error, setError] = useState("");
 
+  const [categories, setCategories] = useState([]);
+
+  useEffect(() => {
+    async function loadCategories() {
+      try {
+        const response = await api.get("/categories");
+
+        setCategories(response.data.categories);
+      } catch (error) {
+        console.error("Unable to load job categories:", error);
+      }
+    }
+
+    loadCategories();
+  }, []);
+
   useEffect(() => {
     if (!isEditing) {
       return;
@@ -193,14 +209,32 @@ export default function RecruiterJobFormPage() {
                 required
               />
 
-              <Input
-                label="Category"
-                name="category"
-                value={form.category}
-                onChange={updateField}
-                placeholder="Software Development"
-                required
-              />
+              <label className="block">
+                <span className="text-sm font-semibold">Category</span>
+
+                <select
+                  name="category"
+                  value={form.category}
+                  onChange={updateField}
+                  required
+                  className="mt-2 w-full rounded-xl border border-slate-300 bg-white px-4 py-3 outline-none focus:border-blue-500"
+                >
+                  <option value="">Select a category</option>
+
+                  {categories.map((category) => (
+                    <option key={category._id} value={category.name}>
+                      {category.name}
+                    </option>
+                  ))}
+                </select>
+
+                {categories.length === 0 && (
+                  <span className="mt-2 block text-xs text-orange-600">
+                    No active categories available. An admin must create a
+                    category first.
+                  </span>
+                )}
+              </label>
 
               <Input
                 label="Location"

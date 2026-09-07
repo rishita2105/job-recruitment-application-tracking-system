@@ -21,6 +21,9 @@ import RecruiterApplicationDetailsPage from "./pages/RecruiterApplicationDetails
 import RecruiterInterviewFormPage from "./pages/RecruiterInterviewFormPage";
 import RecruiterInterviewsPage from "./pages/RecruiterInterviewsPage";
 import CandidateInterviewsPage from "./pages/CandidateInterviewsPage";
+import AdminUsersPage from "./pages/AdminUsersPage";
+import AdminJobsPage from "./pages/AdminJobsPage";
+import AdminCategoriesPage from "./pages/AdminCategoriesPage";
 
 export default function App() {
   return (
@@ -172,6 +175,32 @@ export default function App() {
         element={
           <ProtectedRoute allowedRoles={["admin"]}>
             <AdminDashboard />
+          </ProtectedRoute>
+        }
+      />
+      <Route
+        path="/admin/users"
+        element={
+          <ProtectedRoute allowedRoles={["admin"]}>
+            <AdminUsersPage />
+          </ProtectedRoute>
+        }
+      />
+
+      <Route
+        path="/admin/jobs"
+        element={
+          <ProtectedRoute allowedRoles={["admin"]}>
+            <AdminJobsPage />
+          </ProtectedRoute>
+        }
+      />
+
+      <Route
+        path="/admin/categories"
+        element={
+          <ProtectedRoute allowedRoles={["admin"]}>
+            <AdminCategoriesPage />
           </ProtectedRoute>
         }
       />

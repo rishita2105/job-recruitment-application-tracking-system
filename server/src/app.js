@@ -15,6 +15,8 @@ import recruiterApplicantRoutes from "./routes/recruiterApplicantRoutes.js";
 import recruiterInterviewRoutes from "./routes/recruiterInterviewRoutes.js";
 import candidateInterviewRoutes from "./routes/candidateInterviewRoutes.js";
 import dashboardRoutes from "./routes/dashboardRoutes.js";
+import adminRoutes from "./routes/adminRoutes.js";
+import categoryRoutes from "./routes/categoryRoutes.js";
 
 const app = express();
 
@@ -23,31 +25,23 @@ const dirname = path.dirname(filename);
 
 //const dashboardRoutes = require("./routes/dashboardRoutes");
 
-const uploadsDirectory = path.resolve(
-  dirname,
-  "../uploads",
-);
+const uploadsDirectory = path.resolve(dirname, "../uploads");
 
 app.use(helmet());
-app.use(cors({
-  origin: process.env.CLIENT_URL || "http://localhost:5173",
-  credentials: true,
-}));
+app.use(
+  cors({
+    origin: process.env.CLIENT_URL || "http://localhost:5173",
+    credentials: true,
+  }),
+);
 app.use(express.json());
 app.use(express.urlencoded({ extended: true }));
 app.use(cookieParser());
 
 app.use(
   "/uploads",
-  function allowCrossOriginImages(
-    request,
-    response,
-    next,
-  ) {
-    response.setHeader(
-      "Cross-Origin-Resource-Policy",
-      "cross-origin",
-    );
+  function allowCrossOriginImages(request, response, next) {
+    response.setHeader("Cross-Origin-Resource-Policy", "cross-origin");
 
     next();
   },
@@ -55,44 +49,26 @@ app.use(
   express.static(uploadsDirectory),
 );
 
-app.use(
-  "/api/candidate/profile",
-  candidateProfileRoutes,
-);
+app.use("/api/candidate/profile", candidateProfileRoutes);
 
-app.use(
-  "/api/recruiter/company",
-  companyRoutes,
-);
+app.use("/api/recruiter/company", companyRoutes);
 
-app.use(
-  "/api/recruiter/jobs",
-  recruiterJobRoutes,
-);
+app.use("/api/recruiter/jobs", recruiterJobRoutes);
 
-app.use(
-  "/api/recruiter",
-  recruiterApplicantRoutes,
-);
+app.use("/api/recruiter", recruiterApplicantRoutes);
 
-app.use(
-  "/api/recruiter",
-  recruiterInterviewRoutes,
-);
+app.use("/api/recruiter", recruiterInterviewRoutes);
 
-app.use(
-  "/api/candidate/interviews",
-  candidateInterviewRoutes,
-);
+app.use("/api/candidate/interviews", candidateInterviewRoutes);
 
 app.use("/api/jobs", publicJobRoutes);
 
-app.use(
-  "/api/candidate/jobs",
-  candidateJobRoutes,
-);
+app.use("/api/candidate/jobs", candidateJobRoutes);
 
 app.use("/api/dashboard", dashboardRoutes);
+
+app.use("/api/admin", adminRoutes);
+app.use("/api/categories", categoryRoutes);
 
 app.get("/", (request, response) => {
   response.json({

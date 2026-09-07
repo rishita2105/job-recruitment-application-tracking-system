@@ -244,7 +244,7 @@ export async function getAdminDashboard(request, response) {
       }),
 
       User.find()
-        .select("name email role isBlocked createdAt")
+        .select("name email role status createdAt")
         .sort({ createdAt: -1 })
         .limit(5),
 

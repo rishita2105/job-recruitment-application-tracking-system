@@ -23,6 +23,8 @@ export async function authenticate(request, response, next) {
     }
 
     if (user.status === "blocked") {
+      response.clearCookie("token");
+
       return response.status(403).json({
         success: false,
         message: "Your account has been blocked",
@@ -32,7 +34,10 @@ export async function authenticate(request, response, next) {
     request.user = user;
     next();
   } catch (error) {
-    if (error.name === "JsonWebTokenError" || error.name === "TokenExpiredError") {
+    if (
+      error.name === "JsonWebTokenError" ||
+      error.name === "TokenExpiredError"
+    ) {
       return response.status(401).json({
         success: false,
         message: "Your session is invalid or has expired",

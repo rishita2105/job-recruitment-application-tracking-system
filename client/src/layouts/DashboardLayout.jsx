@@ -4,10 +4,12 @@ import {
   Building2,
   CalendarDays,
   FileText,
+  FolderKanban,
   House,
   LogOut,
   Search,
   UserRound,
+  Users,
   UsersRound,
 } from "lucide-react";
 
@@ -115,6 +117,24 @@ export default function DashboardLayout({ role, title, subtitle, children }) {
               <NavLink to="/recruiter/interviews" className={navigationClass}>
                 <CalendarDays size={18} />
                 Interviews
+              </NavLink>
+            </>
+          )}
+          {roleKey === "admin" && (
+            <>
+              <NavLink to="/admin/users" className={navigationClass}>
+                <Users size={18} />
+                Users
+              </NavLink>
+
+              <NavLink to="/admin/jobs" className={navigationClass}>
+                <BriefcaseBusiness size={18} />
+                Jobs
+              </NavLink>
+
+              <NavLink to="/admin/categories" className={navigationClass}>
+                <FolderKanban size={18} />
+                Categories
               </NavLink>
             </>
           )}

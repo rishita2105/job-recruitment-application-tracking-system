@@ -30,14 +30,6 @@ const userSchema = new mongoose.Schema(
       required: true,
       default: "candidate",
     },
-    isBlocked: {
-      type: Boolean,
-      default: false,
-    },
-    blockedAt: {
-      type: Date,
-      default: null,
-    },
     status: {
       type: String,
       enum: ["active", "blocked"],
