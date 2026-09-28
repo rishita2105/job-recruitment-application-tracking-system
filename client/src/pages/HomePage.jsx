@@ -6,7 +6,7 @@ import { useAuth } from "../context/AuthContext";
 const roles = [
   {
     name: "Candidate",
-    text: "Search jobs and track every application.",
+    text: "Search jobs and track every thing in the application.",
     path: "/register?role=candidate",
     icon: UserRound,
     color: "bg-blue-600",
